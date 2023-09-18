@@ -7,7 +7,7 @@ from sklearn.model_selection import train_test_split
 
 label_map = {'Joyful': 0, 'Scared': 1, 'Sad': 2, 'Neutral': 3, 'Excited': 4}
 def IEMOCAP():
-    path = r"D:\Brandeis University\4th-Semester\NLPSystems\dataset\IEMOCAP\archive\IEMOCAP_features.pkl"
+    path = r"dataset\IEMOCAP\archive\IEMOCAP_features.pkl"
     videoIDs, videoSpeakers, videoLabels, videoText, videoAudio, videoVisual, videoSentence, trainVid, testVid = pickle.load(open(path, 'rb'), encoding='latin1')
     IDs = videoIDs.keys()
     sequence_labels = [videoLabels[id] for id in IDs]
@@ -40,8 +40,8 @@ def IEMOCAP():
 
 def dailyDialogue():
     BRONZE_LIST = []
-    text_path = r"D:\Brandeis University\4th-Semester\NLPSystems\dataset\dailyDialogue\ijcnlp_dailydialog\ijcnlp_dailydialog\dialogues_text.txt"
-    emotion_path = r"D:\Brandeis University\4th-Semester\NLPSystems\dataset\dailyDialogue\ijcnlp_dailydialog\ijcnlp_dailydialog\dialogues_emotion.txt"
+    text_path = r"dataset\dailyDialogue\ijcnlp_dailydialog\ijcnlp_dailydialog\dialogues_text.txt"
+    emotion_path = r"dataset\dailyDialogue\ijcnlp_dailydialog\ijcnlp_dailydialog\dialogues_emotion.txt"
     with open(text_path, encoding="UTF-8")as text:
         text = text.readlines()
     with open(emotion_path, encoding="UTF-8") as emotion:
@@ -81,7 +81,7 @@ def dailyDialogue():
 
 
 def friends():
-    path = r"D:\Brandeis University\4th-Semester\NLPSystems\dataset\friends-corpus\utterances.jsonl"
+    path = r"dataset\friends-corpus\utterances.jsonl"
     with open(path, 'r') as json_file:
         json_list = list(json_file)
     id_text_label_dict = defaultdict(list)
