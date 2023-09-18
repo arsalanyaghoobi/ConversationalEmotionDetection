@@ -18,17 +18,17 @@ class Model(nn.Module):
 
     def forward(self, embedding, mask, lstm):
         if lstm:
-            mask = torch.unsqueeze(mask, dim=-1) # torch.Size([10, 200, 768])
+            mask = torch.unsqueeze(mask, dim=-1) 
             llm_embedding_masked = embedding * mask
-            out, last_hiddenState = self.lstm(llm_embedding_masked)  # batch, max, hidden # torch.Size([10, 200, 100])
+            out, last_hiddenState = self.lstm(llm_embedding_masked)  # batch, max, hidden 
             out = out.transpose(2,1) #  batch,hidden, max # torch.Size([10, 100, 200])
-            average_poolOut = self.adaptiveAveragePool(out) # average on max_length to get a summary of the sequence # torch.Size([10, 100, 1])
-            squeezeOut = torch.squeeze(average_poolOut, -1) # torch.Size([10, 200])
+            average_poolOut = self.adaptiveAveragePool(out) # average on max_length to get a summary of the sequence 
+            squeezeOut = torch.squeeze(average_poolOut, -1) 
             dropout_out1 = self.dropout(squeezeOut)
-            fc1_out = self.fc_layer(dropout_out1) # torch.Size([10, 5])
+            fc1_out = self.fc_layer(dropout_out1) 
             return fc1_out
         else:
-            mask = torch.unsqueeze(mask, dim=-1)  # torch.Size([10, 200, 768])
+            mask = torch.unsqueeze(mask, dim=-1) 
             llm_embedding_masked = embedding * mask
             averagePool_out = self.globAveragePool(llm_embedding_masked)
             drop_out = self.dropout(averagePool_out).squeeze()
